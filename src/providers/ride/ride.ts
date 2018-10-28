@@ -9,6 +9,9 @@ import { Ride, hashRide, RideType, MyRides } from 'openride-shared'
 import { User } from 'openride-shared'
 import { Link, idLink } from 'openride-shared'
 import { Prospect, ProspectType } from 'openride-shared'
+import { Rating } from 'openride-shared'
+
+import 'rxjs/add/operator/toPromise';
 
 function flatten_arrays_of_arrays<T>(ts: T[][]) : T[] {
 
@@ -37,8 +40,6 @@ export class RideProvider {
 	constructor(
 		public httpClient: HttpClient,
 		public userProvider: UserProvider) {
-
-		console.log('Hello RidersProvider Provider');
 
 	}
 
@@ -269,6 +270,7 @@ export class RideProvider {
 		let find_prospect_rides_from_ride = (ride: Ride) : Promise<Ride[]> =>
 		this.httpClient.get(`${ settings.apiEndpoint }/api/rides/${ ride._id }/prospects`).toPromise()
 		.then((prospects: Prospect[]) : Promise<Ride[]> => (
+
 			//	Only take the prospect I have not created
 			Promise.all(prospects.filter((prospect: Prospect) => prospect.ride['@id'] == `/api/rides/${ ride._id }`)
 				.map(
@@ -279,6 +281,7 @@ export class RideProvider {
 		// Find the list of prospects
 		// Takes a list of rides and return a Promise<Ride[]>
 		let find_prospect_list = (rides: Ride[]) : Promise<Ride[]> => (
+
 			Promise.all(rides.map((ride: Ride): Promise<Ride[]> => find_prospect_rides_from_ride(ride)))
 			.then((adjacents_rides_per_ride: Ride[][]): Ride[] => (
 				flatten_arrays_of_arrays(adjacents_rides_per_ride)		
@@ -302,6 +305,33 @@ export class RideProvider {
 				}	
 			))
 
+		).then((myRides: MyRides) => 
+		
+		// Filter my rides to check if any of them are finalised
+
+			Promise.all(myRides.myRides.map((ride: Ride) =>
+			
+				this.httpClient.get(
+					`${ settings.apiEndpoint }/api/rides/${ride._id}/ratings`)
+					.toPromise().then( (ratings: Rating[]) =>{
+				
+						if(ratings.filter((rating) => 
+							idLink(rating.ride) == ride._id && 
+							idLink(rating.from) == this.userProvider.me._id).length)
+
+							ride.finalized = true;
+
+						return ride; 
+
+				})	
+			
+			)).then((rides: Ride[]) => {
+			
+				myRides.myRides = rides;
+				return myRides;
+			
+			})
+		
 		)
 
 	}
@@ -312,8 +342,6 @@ export class RideProvider {
 	 *
 	 */
 	join(ride: Ride) {
-
-		console.log('ride: ', ride)
 
 		/*
 					The user to add will be me if I'm accepting an offer.
@@ -377,6 +405,8 @@ export class RideProvider {
 	 */
 	confirm(ride: Ride){
 
+		this.currentRide.confirmed = true;
+
 		this.httpClient.put(`${ settings.apiEndpoint }/api/rides/${ ride._id }`, 
 			{ ride: {confirmed: true } }).toPromise().catch((err) =>
 				console.error('Could not confirm the ride', err))
@@ -404,6 +434,61 @@ export class RideProvider {
 	
 		return this.httpClient.delete(`${ settings.apiEndpoint}/api/rides/${ ride._id }`)
 			.toPromise();
+	
+	}
+
+	/*
+	 *
+	 * This will finalize the ride and release the fund
+	 *
+	 */
+	finalize(ride: Ride, users: User[]) {
+
+		ride.finalized = true;
+
+		let ratings : Rating[] = users.map((user: User) => ({
+		
+			ride: {'@id' : `/api/rides/${ ride._id }`},
+			from: {'@id' : `/api/users/${ this.userProvider.me._id }`},
+			to: {'@id' : `/api/users/${ user._id }`},
+			rate: user.rate
+		
+		}))
+
+		return this.httpClient.put(
+				`${ settings.apiEndpoint}/api/rides/${ ride._id }/ratings/${ this.userProvider.me._id}`,
+				{	ratings })
+		.toPromise().then(() => {
+			
+			return this.httpClient.get(
+				`${ settings.apiEndpoint}/api/rides/${ ride._id }/ratings`,
+			).toPromise().then((ratings: Rating[]) => {
+
+				let n_rides = ride.riders.length;
+				if(ratings.length == n_rides * n_rides + 1)
+					return this.httpClient.delete(
+						`${ settings.apiEndpoint}/api/rides/${ ride._id }`,
+					).toPromise()
+				else
+					return Promise.resolve(null)
+			})
+			
+		})
+	
+	
+	}
+
+	/*
+	 *
+	 * This will return a list of user to rate
+	 *
+	 */
+	toRate() : User[] {
+
+		let ride = this.currentRide;
+		return [<User>ride.driver].concat(<User[]>ride.riders)
+			.filter((user) => 
+				user._id != this.userProvider.me._id)
 	
 	}
 

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { RideProvider } from '../../providers/ride/ride'
 
-import { User } from 'shared/models/user'
+import { User } from 'openride-shared'
 
 @IonicPage()
 @Component({

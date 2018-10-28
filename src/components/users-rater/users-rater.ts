@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { User } from 'shared/models/user'
+import { User } from 'openride-shared'
 
 /*
  *
