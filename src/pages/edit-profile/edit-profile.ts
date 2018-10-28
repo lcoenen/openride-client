@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams,
 	ToastController, Events, ViewController } from 'ionic-angular';
 
-import { User } from 'shared/models/user';
+import { User } from 'openride-shared';
 
 import { UserProvider, EditMode } from '../../providers/user/user'
 

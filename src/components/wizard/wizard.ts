@@ -6,7 +6,7 @@ import { WizardPageComponent } from '../wizard-page/wizard-page';
 
 import { EditMode } from '../../providers/ride/ride';
 
-import { RideType } from 'shared/models/ride'
+import { RideType } from 'openride-shared'
 
 /**
  * Generated class for the WizardComponent component.

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { PayementPhilosophy } from '../../../../shared/models/ride';
+import { PayementPhilosophy } from 'openride-shared';
 
 const _boundaries = [10, 40, 60, 80]
 

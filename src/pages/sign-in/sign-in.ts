@@ -6,7 +6,7 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 
 import { UserProvider } from '../../providers/user/user';
 
-import { User, Credentials } from 'shared/models/user';
+import { User, Credentials } from 'openride-shared';
 
 
 /**

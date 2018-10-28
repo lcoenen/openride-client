@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 import { settings } from '../../config/config'
 
 
-import { Message } from 'shared/models/message'
-import { User } from 'shared/models/user'
-import { Ride } from 'shared/models/ride'
+import { Message } from 'openride-shared'
+import { User } from 'openride-shared'
+import { Ride } from 'openride-shared'
 
 /*
   Generated class for the MessageProvider provider.

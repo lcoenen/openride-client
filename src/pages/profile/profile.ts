@@ -5,7 +5,7 @@ import { UserProvider } from '../../providers/user/user'
 
 import { EditProfilePage } from '../edit-profile/edit-profile'
 
-import { User } from 'shared/models/user';
+import { User } from 'openride-shared';
 
 /**
  * Generated class for the ProfilePage page.

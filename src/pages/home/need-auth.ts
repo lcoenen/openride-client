@@ -4,7 +4,7 @@ import { NavController, Events } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { SignInPage } from '../sign-in/sign-in';
 
-import { User } from 'shared/models/user';
+import { User } from 'openride-shared';
 
 /*
  *

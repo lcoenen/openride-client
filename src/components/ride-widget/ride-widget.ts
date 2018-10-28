@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
-import { Ride, RideType } from 'shared/models/ride';
-import { User } from 'shared/models/user';
+import { Ride, RideType } from 'openride-shared';
+import { User } from 'openride-shared';
 
 import { UserProvider } from '../../providers/user/user'
 import { ProfilePage } from '../../pages/profile/profile';
@@ -17,7 +17,7 @@ import { ProfilePage } from '../../pages/profile/profile';
  *
  * It shows the right information wether the ride is a request or an offer
  *
- * See /shared/models/ride.ts
+ * See /openride-shared.ts
  *
  */
 @Component({

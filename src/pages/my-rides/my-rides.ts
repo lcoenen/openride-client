@@ -6,8 +6,8 @@ import { RideBoardPage } from '../ride-board/ride-board';
 import { MatchesPage } from '../matches/matches'; 
 import { EditRidePage } from '../edit-ride/edit-ride';
 
-import { Ride, RideType } from 'shared/models/ride';
-import { User } from 'shared/models/user';
+import { Ride, RideType } from 'openride-shared';
+import { User } from 'openride-shared';
 
 import { UserProvider }  from '../../providers/user/user';
 

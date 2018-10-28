@@ -13,8 +13,8 @@ import { SignInPage } from '../pages/sign-in/sign-in'
 import { UserProvider } from '../providers/user/user';
 import { RideProvider } from '../providers/ride/ride';
 
-import { User } from 'shared/models/user';
-import { RideType } from 'shared/models/ride';
+import { User } from 'openride-shared';
+import { RideType } from 'openride-shared';
 
 import { identify } from '../pages/home/need-auth';
 

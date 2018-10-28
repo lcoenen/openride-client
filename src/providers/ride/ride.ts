@@ -5,11 +5,10 @@ import { settings } from '../../config/config'
 
 import { UserProvider } from '../user/user'
 
-import { Ride, hashRide, RideType, MyRides } from 'shared/models/ride'
-import { User } from 'shared/models/user'
-import { Link, idLink } from 'shared/models/link'
-import { Prospect, ProspectType } from 'shared/models/prospect'
-import { RidesMock } from 'shared/mocks/ride';
+import { Ride, hashRide, RideType, MyRides } from 'openride-shared'
+import { User } from 'openride-shared'
+import { Link, idLink } from 'openride-shared'
+import { Prospect, ProspectType } from 'openride-shared'
 
 function flatten_arrays_of_arrays<T>(ts: T[][]) : T[] {
 
@@ -25,7 +24,7 @@ function flatten_arrays_of_arrays<T>(ts: T[][]) : T[] {
 export enum EditMode {
 
 	EDIT,
-		CREATE
+	CREATE
 
 }
 
@@ -175,19 +174,6 @@ export class RideProvider {
 
 	}
 
-
-	/*
-	 *
-	 * Used when a rider request a ride, to show him matches
-	 *
-	 * It makes the link with the src/pages/request-find-ride/ page and use the entry point /api/rides/:id/matches
-	 *
-	 */
-	request_find_ride(): Promise<Ride[]> {
-
-		return Promise.resolve([RidesMock[3], RidesMock[4]]) 
-
-	}
 
 	/*
 	 *

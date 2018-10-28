@@ -6,7 +6,7 @@
  * Ionic pages and navigation.
  */
 
-import { Ride, RideType } from 'shared/models/ride';
+import { Ride, RideType } from 'openride-shared';
 
 import { ModalController, NavParams, IonicPage, NavController } from 'ionic-angular';
 

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 
-import { Ride, RideType } from 'shared/models/ride';
-import { Prospect } from 'shared/models/prospect';
-import { Link } from 'shared/models/link';
+import { Ride, RideType } from 'openride-shared';
+import { Prospect } from 'openride-shared';
+import { Link } from 'openride-shared';
 
 import { RideProvider } from '../../providers/ride/ride';
 

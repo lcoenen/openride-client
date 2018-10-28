@@ -9,7 +9,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/c
 
 import { Observable } from 'rxjs/Observable'
 
-import { User, Credentials, SignupResponse, Signature } from 'shared/models/user';
+import { User, Credentials, SignupResponse, Signature } from 'openride-shared';
 
 import { settings } from '../../config/config'
 
