@@ -305,7 +305,8 @@ export class RideProvider {
 				}	
 			))
 
-		).then((myRides: MyRides) => 
+		)
+		/*.then((myRides: MyRides) => 
 		
 		// Filter my rides to check if any of them are finalised
 
@@ -333,6 +334,7 @@ export class RideProvider {
 			})
 		
 		)
+		*/
 
 	}
 
