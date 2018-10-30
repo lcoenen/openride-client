@@ -1,3 +1,4 @@
+IONIC = node_modules/.bin/ionic
 ENTRY_POINT = www/index.html
 APP_NAME = openride
 
@@ -9,7 +10,7 @@ APK_OUTPUT = openride-$(shell jq '.version' package.json -r).apk
 .PHONY: build watch apk clean clean_tmp
 	
 $(ENTRY_POINT): 
-	ionic build
+	$(IONIC) build
 
 watch:
 	nodemon --exec "make" -w src -e ts,html,css,scss
