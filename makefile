@@ -1,11 +1,13 @@
+IONIC = node_modules/.bin/ionic
+
 .PHONY: build
 	
 build:
-	ionic build
+	$(IONIC) build
 
 watch:
 	nodemon --exec "make" -w src -e ts,html,css,scss
 
 apk: 
-	ionic cordova build --release android
+	$(IONIC) cordova build --release android
 
