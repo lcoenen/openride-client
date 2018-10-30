@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-IONIC = node_modules/.bin/ionic
-
-.PHONY: build
-	
-build:
-	$(IONIC) build
-=======
 ENTRY_POINT = www/index.html
 APP_NAME = openride
 
