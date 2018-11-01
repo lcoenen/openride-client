@@ -94,11 +94,14 @@ export class RideBoardPage {
 
 		loading.present()
 	
-		this.messageProvider.getMessages(this.ride).then((messages: Message[]) => {
+		this.messageProvider.getMessages(this.ride).then((results: { messages: Message[], unreads: number} ) => {
+
+			let { messages, unreads } = result;
 
 			loading.dismiss();
 
 			this.messages = messages;   
+			this.unreads = unreads;
 
 		})
 	

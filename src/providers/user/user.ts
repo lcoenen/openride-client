@@ -161,7 +161,7 @@ export class UserProvider {
 				if(error.status == 401 && error.error.code == 'DUPLICATE') 
 					throw 'DUPLICATE'
 				else console.error(error);
-				throw error;
+					throw error;
 
 			})
 

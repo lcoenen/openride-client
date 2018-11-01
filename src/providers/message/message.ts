@@ -3,17 +3,14 @@ import { Injectable } from '@angular/core';
 
 import { settings } from '../../config/config'
 
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import { Message } from 'openride-shared'
 import { User } from 'openride-shared'
 import { Ride } from 'openride-shared'
 
-/*
-  Generated class for the MessageProvider provider.
+const LAST_READ_KEY = 'openride-last-read-messages'
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class MessageProvider {
 
@@ -26,7 +23,9 @@ export class MessageProvider {
 	 * This will get the populated list of message for the current ride
 	 *
 	 */
-	getMessages(ride: Ride) {
+	getMessages(ride: Ride) : Promise< {
+
+		let lastRead = <Date>Cookie.get(LAST_READ_KEY);
 
 		// Get the messages
 		return this.http.get(`${ settings.apiEndpoint }/api/rides/${ ride._id }/messages`).toPromise()
@@ -41,7 +40,15 @@ export class MessageProvider {
 				
 				))  
 
-			))
+			)).then((messages: Message[]) => {
+
+				unreads = message.filter((message: Message) => 
+					message.date > lastRead).length;
+			
+				Cookie.set(LAST_READ_KEY, Date.now())
+				return { messages, unreads };
+
+			})
 	
 	}
 
@@ -52,9 +59,6 @@ export class MessageProvider {
 	 */
 	postMessage(message: Message, ride: Ride) {
 
-		console.log(`message`)
-		console.log(message)
-	
 		return this.http.post(`${ settings.apiEndpoint }/api/rides/${ ride._id }/messages`, 
 			{ message: message } )
 			.toPromise()
