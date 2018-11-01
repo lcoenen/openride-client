@@ -15,7 +15,6 @@ const LAST_READ_KEY = 'openride-last-read-messages'
 export class MessageProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello MessageProvider Provider');
   }
 
 	/*
@@ -38,13 +37,15 @@ export class MessageProvider {
 					this.http.get(`${ settings.apiEndpoint }${ message.author['@id'] }`).toPromise()
 						.then((user: User) => ( message.author = user, message ))
 				
-				))  
+				).reverse())  
 
 			)).then((messages: Message[]) => {
 
+				// 	Find the number of unread messages
 				unreads = message.filter((message: Message) => 
 					message.date > lastRead).length;
 			
+				//	Set the last time you checked cookie to now
 				Cookie.set(LAST_READ_KEY, Date.now())
 				return { messages, unreads };
 
