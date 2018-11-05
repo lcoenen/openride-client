@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams,
 	ToastController, Events, ViewController } from 'ionic-angular';
 
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+
 import { User } from 'openride-shared';
 
 import { UserProvider, EditMode } from '../../providers/user/user'
@@ -51,6 +54,8 @@ export class EditProfilePage {
 		public navParams: NavParams,
 		public events: Events,
 		public toastCtrl: ToastController,
+		private imagePicker: ImagePicker,
+		private base64: Base64,
 		public userProvider: UserProvider) {
 
 		this.user = this.userProvider.currentUser;
@@ -178,6 +183,19 @@ export class EditProfilePage {
 		this.userProvider.discard();
 		this.navCtrl.pop()
 
+	}
+
+	/*
+	 *
+	 * This will try grab an image and send it to avatar
+	 *
+	 */
+	avatar() {
+	
+		this.imagePicker.getPictures({maximumImagesCount: 1}).then((results) => 
+			this.base64.encodeFile(results[0]).then((base64File: string) =>
+				this.user.avatar = base64File; )
+	
 	}
 
 }

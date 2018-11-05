@@ -1,18 +1,19 @@
 import * as sha256 from 'sha256';
 
-import { Cookie } from 'ng2-cookies/ng2-cookies';
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable'
 
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+
 import { User, Credentials, SignupResponse, Signature } from 'openride-shared';
 
 import { settings } from '../../config/config'
-
 import { EditMode } from '../ride/ride';
 
 const KEY_NAME = "openride-server-session";
@@ -57,7 +58,8 @@ export class UserProvider {
 
 	private _me: User;
 
-	constructor(public http: HttpClient) {
+	constructor(public http: HttpClient,
+		private sanitizer: DomSanitizer) {
 	}
 
 	public currentUser: User;
@@ -331,6 +333,17 @@ export class UserProvider {
 			console.error('Error while loging out', err)
 		
 		})
+	
+	}
+
+	/*
+	 *
+	 * This will sanitize the avatar Base64 URI
+	 *
+	 */
+	public avatar(user: User) {
+	
+		return this.sanitizer.bypassSecurityTrustRessourceUrl(user.avatar)	
 	
 	}
 

@@ -58,7 +58,7 @@
 					<ion-item>
 
 						<ion-avatar item-start>
-							<img src="assets/imgs/avatar_{{ride.driver.name}}.png">
+							<img src="userProvider.avatar(ride.driver)">
 						</ion-avatar>
 						<h2>{{ride.driver.name}}</h2>
 					</ion-item>
@@ -82,7 +82,7 @@
 				<ion-item-sliding *ngFor="let rider of ride.riders">
 					<ion-item>
 						<ion-avatar item-start>
-							<img src="assets/imgs/avatar_{{rider.name}}.png">
+							<img src="userProvider.avatar(rider)">
 						</ion-avatar>
 						<h2>{{rider.name}}</h2>
 					</ion-item>
