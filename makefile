@@ -9,8 +9,10 @@ APK_OUTPUT = openride-$(shell jq '.version' package.json -r).apk
 
 .PHONY: build watch apk clean clean_tmp
 	
-$(ENTRY_POINT): 
+build:  
 	$(IONIC) build
+
+$(ENTRY_POINT): build
 
 watch:
 	nodemon --exec "make" -w src -e ts,html,css,scss

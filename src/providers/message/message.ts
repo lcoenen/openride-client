@@ -14,6 +14,7 @@ const LAST_READ_KEY = 'openride-last-read-messages'
 @Injectable()
 export class MessageProvider {
 
+
   constructor(public http: HttpClient) {
   }
 
@@ -22,9 +23,9 @@ export class MessageProvider {
 	 * This will get the populated list of message for the current ride
 	 *
 	 */
-	getMessages(ride: Ride) : Promise< {
+	getMessages(ride: Ride)  {
 
-		let lastRead = <Date>Cookie.get(LAST_READ_KEY);
+		let lastRead: Date = new Date(Cookie.get(LAST_READ_KEY));
 
 		// Get the messages
 		return this.http.get(`${ settings.apiEndpoint }/api/rides/${ ride._id }/messages`).toPromise()
@@ -42,11 +43,11 @@ export class MessageProvider {
 			)).then((messages: Message[]) => {
 
 				// 	Find the number of unread messages
-				unreads = message.filter((message: Message) => 
+				let unreads = messages.filter((message: Message) => 
 					message.date > lastRead).length;
 			
 				//	Set the last time you checked cookie to now
-				Cookie.set(LAST_READ_KEY, Date.now())
+				Cookie.set(LAST_READ_KEY, (new Date().toString()))
 				return { messages, unreads };
 
 			})
