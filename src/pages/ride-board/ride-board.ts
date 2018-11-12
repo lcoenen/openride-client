@@ -61,6 +61,13 @@ export class RideBoardPage {
 	 */
 	ride: Ride;
 
+	/*
+	 *
+	 * This will be the number of unread messages
+	 *
+	 */
+	unreads: number;
+
 	constructor(public navCtrl: NavController, 
 		public navParams: NavParams,
 		public rideProvider: RideProvider,
@@ -94,9 +101,9 @@ export class RideBoardPage {
 
 		loading.present()
 	
-		this.messageProvider.getMessages(this.ride).then((results: { messages: Message[], unreads: number} ) => {
+		this.messageProvider.getMessages(this.ride).then((results: any /*{ messages: Message[], unreads: number}(*/ ) => {
 
-			let { messages, unreads } = result;
+			let messages : Message[], unreads: number = results; 
 
 			loading.dismiss();
 
