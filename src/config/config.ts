@@ -3,9 +3,9 @@ let env = 'development';
 
 export let settings = {
   name: 'openride-client',
-  version: '0.0.1',
+  version: '0.0.2',
   env: 'dev',
-	apiEndpoint: 'http://radiaserv.tk:3000'
+	apiEndpoint: 'http://api.openride.tk'
 };
 
 if (env === 'production') {

@@ -194,7 +194,7 @@ export class EditProfilePage {
 	
 		this.imagePicker.getPictures({maximumImagesCount: 1}).then((results) => 
 			this.base64.encodeFile(results[0]).then((base64File: string) =>
-				this.user.avatar = base64File; )
+				this.user.avatar = base64File ))
 	
 	}
 

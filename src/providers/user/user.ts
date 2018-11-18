@@ -343,7 +343,7 @@ export class UserProvider {
 	 */
 	public avatar(user: User) {
 	
-		return this.sanitizer.bypassSecurityTrustRessourceUrl(user.avatar)	
+		return this.sanitizer.bypassSecurityTrustResourceUrl(user.avatar)	
 	
 	}
 
