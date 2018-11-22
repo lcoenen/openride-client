@@ -1,7 +1,7 @@
 <!-- Generated template for the UsersRaterComponent component -->
 <div *ngIf="!rated && user">
 	<ion-card>
-		<ion-avatar><img src="userProvider.avatar(user)"/></ion-avatar>
+		<ion-avatar><img src="{{userProvider.avatar(user)}}"/></ion-avatar>
 		<p><strong>How was your experience with {{user.name}}</strong></p>
 		<rating [(ngModel)]="user.rate" 
 			readOnly="false" 
