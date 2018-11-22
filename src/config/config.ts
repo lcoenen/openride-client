@@ -5,7 +5,7 @@ export let settings = {
   name: 'openride-client',
   version: '0.0.2',
   env: 'dev',
-	apiEndpoint: 'http://api.openride.tk'
+	apiEndpoint: 'https://api.openride.tk'
 };
 
 if (env === 'production') {
