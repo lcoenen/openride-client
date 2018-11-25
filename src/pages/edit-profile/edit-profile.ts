@@ -198,4 +198,17 @@ export class EditProfilePage {
 	
 	}
 
+	/*
+	 *
+	 * This will be the linked property of the second page
+	 *
+	 */
+	get carLinkedProperties() {
+	
+		return this.user.has_car? 
+			[this.user.presentation, this.user.vehicle, this.user.charge_per_km] : 
+			[this.user.presentation];	
+	
+	}
+
 }
