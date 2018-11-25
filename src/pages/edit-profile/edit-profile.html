@@ -49,7 +49,7 @@
 		<p><ion-note *ngIf="mode == EditMode.CREATE">Already have an account? <a (click)="toSignIn()">Sign in</a>.</ion-note></p>
 	</ion-list>
 </wizard-page>
-<wizard-page [linked]="[user.presentation, user.vehicle, user.charge_per_km]">
+<wizard-page [linked]="carLinkedProperties">
 	<ion-list>
 		<ion-item>
 			<ion-label stacked>Tell more about yourself</ion-label>
