@@ -1,7 +1,7 @@
 <ion-card> 
 	<ion-item (click)="profile(user)">
 		<ion-avatar item-start>
-			<img src="{{userProvider.avatar(user)}}">
+			<img [src]="userProvider.avatar(user)">
 		</ion-avatar>
 		<h2>{{user.name}}</h2>
 		<p>{{user.age}} years old, from {{user.place_of_origin}}</p>
