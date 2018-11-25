@@ -58,7 +58,7 @@
 					<ion-item>
 
 						<ion-avatar item-start>
-							<img src="userProvider.avatar(ride.driver)">
+							<img [src]="userProvider.avatar(ride.driver)">
 						</ion-avatar>
 						<h2>{{ride.driver.name}}</h2>
 					</ion-item>
@@ -82,7 +82,7 @@
 				<ion-item-sliding *ngFor="let rider of ride.riders">
 					<ion-item>
 						<ion-avatar item-start>
-							<img src="userProvider.avatar(rider)">
+							<img [src]="userProvider.avatar(rider)">
 						</ion-avatar>
 						<h2>{{rider.name}}</h2>
 					</ion-item>
@@ -110,7 +110,7 @@
 			<ion-list >
 				<ion-item *ngFor="let message of messages">
 					<ion-avatar item-start>
-						<img src="userProvider.avatar(message.author)">
+						<img [src]="userProvider.avatar(message.author)">
 					</ion-avatar>
 
 					<ion-note>{{message.date | amTimeAgo}}</ion-note>
